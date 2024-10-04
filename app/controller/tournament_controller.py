@@ -1,8 +1,11 @@
 import os
 from os.path import isfile, join
 from app.view.menu_view import MenuView
+
 from app.model.tournoi import Tournament
 from app.model.joueur import Player
+
+from app.controller.player_controller import PlayerController
 
 tournament_folder = 'data/tournaments/'
 
@@ -11,7 +14,6 @@ class TournamentController:
     def __init__(self):
         self.view = MenuView()
         self.tournament = Tournament()
-        # self.state = "main_menu"
 
     def main(self):
         quit_ = False
@@ -25,7 +27,7 @@ class TournamentController:
         exit()
 
     def show_ongoing_matches(self):
-        turn, result = self.view.view_current_matches(self.tournament.turns[-1].matches, self.status_message())
+        turn, result = self.view.match.view_current_matches(self.tournament.turns[-1].matches, self.status_message())
         if turn != -1:
             self.tournament.turns[-1].end_of_match(turn, result)
         else:
@@ -38,21 +40,35 @@ class TournamentController:
                 self.create_new_tournament()
             case "load":
                 self.load_tournament()
-            case "exit":
-                return self.view.ask_confirmation("Do you want to exit?")
+            case "show_players":
+                PlayerController.show_player_menu()
+            case "create_player":
+                PlayerController.create_player()
+            case False:
+                return self.view.tools.ask_confirmation("Do you want to exit?")
 
-    def add_players(self):
-        players = []
-        player_files, player_text = Player.list_existing_players()
-        answer = self.view.add_player(player_files, player_text)
-        for id_ in answer:
-            players.append(Player.players[id_])
-        return players
+    # def show_player_menu(self):
+    #     answer = True
+    #     text = ""
+    #     while answer:
+    #         answer = self.view.player.select_player_for_info(text)
+    #         if answer:
+    #             text = Player.describe(answer)
+
+    # def add_players(self):
+    #     players = []
+    #     player_files, player_text = Player.list_existing_players()
+    #     answer = self.view.player.add_player(player_files, player_text)
+    #     for id_ in answer:
+    #         players.append(Player.players[id_])
+    #     return players
 
     def create_new_tournament(self):
-        # RECUPERATION DES DONNEES A FAIRE DANS LA VUE
-        players = self.add_players()
-        data = self.view.new_tournament(players)  # player_files, player_text)
+        # TODO: RECUPERATION DES DONNEES A FAIRE DANS LA VUE / fix PlayerController
+        players = PlayerController.add_players()
+        for player in players:
+            player.score = 0
+        data = self.view.tournament.new_tournament(players)  # player_files, player_text)
 
         # player_files, player_text = Player.list_existing_players()
         # data = self.view.new_tournament(player_files, player_text)
@@ -62,7 +78,7 @@ class TournamentController:
 
     def load_tournament(self):
         list_file = Tournament.list_existing_tournaments()
-        answer = self.view.reload_existing_tournament(list_file)
+        answer = self.view.tournament.reload_existing_tournament(list_file)
         self.tournament.load_tournament(answer)
         # if self.tournament.current turn < self.tournament.max_turn
         #   go there
