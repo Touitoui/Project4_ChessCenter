@@ -1,6 +1,6 @@
 from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
-from app.tools.InquirerTools import InquirerTools
+from app.tools.inquirer_tools import InquirerTools
 
 
 class PlayerView:
