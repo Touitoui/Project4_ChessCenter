@@ -33,7 +33,7 @@ class MatchView:
                 Choice("victory_2", player_2),
                 Choice("draw", "Égalitée"),
                 Separator(),
-                Choice("cancel", "Annuler")
+                Choice("cancel", "Annuler")  # TODO: Not handled
             ]
         ).execute()
         return answer

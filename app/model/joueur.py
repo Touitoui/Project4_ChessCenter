@@ -71,7 +71,7 @@ class Player:
         text = "ID: " + str(id_) + '\n'
         text += "Nom: " + player.last_name + '\n'
         text += "Prénom: " + player.first_name + '\n'
-        text += "Age: " + "" + " (" + player.birthdate + ")\n"
+        text += "Age: " + "" + " (" + player.birthdate + ")\n"  # TODO: Age
         text += "ID Club: " + player.club_id + '\n'
         return text
 

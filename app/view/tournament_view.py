@@ -22,10 +22,10 @@ class TournamentView:
             "players": players,
             "name": InquirerTools.prompt_text("Nom du tournoi:"),
             "location": InquirerTools.prompt_text("Adresse:"),
-            "start": InquirerTools.prompt_text("Debut:"),  # GERER VALIDATION
-            "end": InquirerTools.prompt_text("Fin:"),  # GERER VALIDATION
+            "start": InquirerTools.prompt_text("Debut:"),  # TODO: GERER VALIDATION
+            "end": InquirerTools.prompt_text("Fin:"),  # TODO: GERER VALIDATION
             "description": InquirerTools.prompt_text("Description du tounoi:"),
             "current_turn": 1,
-            "number_of_turns": InquirerTools.prompt_int("Nombre de tours:", 4)
+            "number_of_turns": InquirerTools.prompt_int("Nombre de tours:", 4)  # TODO
         }
         return data

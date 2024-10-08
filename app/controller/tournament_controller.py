@@ -38,7 +38,7 @@ class TournamentController:
         match answer:
             case "new":
                 self.create_new_tournament()
-            case "load":
+            case "load":  # TODO : show final score if ended
                 self.load_tournament()
             case "show_players":
                 PlayerController.show_player_menu()

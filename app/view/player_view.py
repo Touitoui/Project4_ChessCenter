@@ -15,7 +15,7 @@ class PlayerView:
         }
         return data
 
-    @classmethod
+    @classmethod  # TODO : replace by show_player_list - don't do anything when selecting, show all info in list
     def select_player_for_info(cls, player_list, player_text, text=""):
         player_choice = []
         for i, player in enumerate(player_list):
