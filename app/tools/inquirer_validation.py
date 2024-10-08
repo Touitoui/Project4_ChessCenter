@@ -20,7 +20,7 @@ class InquirerValidation:
             )
 
     @classmethod
-    def datetime_validation(cls, text):
+    def datetime_validation(cls, text):  # TODO: Issue with format, not recognised
         date_format = "%H:%M %d-%m-%y"
         try:
             if text != datetime.strptime(text, date_format).strftime(date_format):
@@ -33,7 +33,7 @@ class InquirerValidation:
 
     @classmethod
     def time_validation(cls, text):
-        date_format = "%Hh%M"
+        date_format = "%H:%M"
         try:
             if text != datetime.strptime(text, date_format).strftime(date_format):
                 raise ValueError
