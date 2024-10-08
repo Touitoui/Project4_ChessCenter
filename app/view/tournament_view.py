@@ -15,9 +15,7 @@ class TournamentView:
         return answer
 
     @classmethod
-    # def new_tournament(self, player_files, player_text):
     def new_tournament(cls, players):
-        # players = self.add_player(player_files, player_text)
         data = {
             "players": players,
             "name": InquirerTools.prompt_text("Nom du tournoi:"),
