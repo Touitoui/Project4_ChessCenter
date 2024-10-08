@@ -20,7 +20,11 @@ class MatchView:
             ).execute()
             selected_player_1 = matches[answer][0][0].get_full_name()
             selected_player_2 = matches[answer][1][0].get_full_name()
-            return answer, cls.view_select_winner(selected_player_1, selected_player_2)
+            answer_winner = cls.view_select_winner(selected_player_1, selected_player_2)
+            # if answer_winner:
+            return answer, answer_winner
+            # else:
+            #     return False
         else:
             return -1, None
 
@@ -33,7 +37,7 @@ class MatchView:
                 Choice("victory_2", player_2),
                 Choice("draw", "Égalitée"),
                 Separator(),
-                Choice("cancel", "Annuler")  # TODO: Not handled
+                Choice(False, "Annuler")
             ]
         ).execute()
         return answer

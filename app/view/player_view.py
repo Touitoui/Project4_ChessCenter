@@ -11,8 +11,8 @@ class PlayerView:
         data = {
             "last_name": InquirerTools.prompt_text("Nom de famille:"),
             "first_name": InquirerTools.prompt_text("Prénom:"),
-            "birthdate": InquirerTools.prompt_date("Date de naissance (JJ-MM-AAAA):", "date"),  # TODO: GERER VALIDATION
-            "club_id": InquirerTools.prompt_club("Numéro de club (Ex: AB12345):"),  # TODO:  GERER VALIDATION AB1234
+            "birthdate": InquirerTools.prompt_date("Date de naissance (JJ-MM-AAAA):", "date"),
+            "club_id": InquirerTools.prompt_club("Numéro de club (Ex: AB12345):"),
         }
         return data
 

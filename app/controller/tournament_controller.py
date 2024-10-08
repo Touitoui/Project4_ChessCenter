@@ -30,9 +30,9 @@ class TournamentController:
 
     def show_ongoing_matches(self):
         turn, result = MatchView.view_current_matches(self.tournament.turns[-1].matches, self.status_message())
-        if turn != -1:
+        if result and turn != -1:
             self.tournament.turns[-1].end_of_match(turn, result)
-        else:
+        elif turn == -1:
             self.tournament.new_turn()
 
     def show_main_menu(self):
