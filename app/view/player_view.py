@@ -1,6 +1,7 @@
 from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
 from app.tools.inquirer_tools import InquirerTools
+from app.tools.inquirer_validation import InquirerValidation
 
 
 class PlayerView:
@@ -10,8 +11,8 @@ class PlayerView:
         data = {
             "last_name": InquirerTools.prompt_text("Nom de famille:"),
             "first_name": InquirerTools.prompt_text("Prénom:"),
-            "birthdate": InquirerTools.prompt_text("Date de naissance:"),  # GERER VALIDATION
-            "club_id": InquirerTools.prompt_text("Numéro de club:"),  # GERER VALIDATION
+            "birthdate": InquirerTools.prompt_date("Date de naissance (JJ-MM-AAAA):", "date"),  # TODO: GERER VALIDATION
+            "club_id": InquirerTools.prompt_club("Numéro de club (Ex: AB12345):"),  # TODO:  GERER VALIDATION AB1234
         }
         return data
 

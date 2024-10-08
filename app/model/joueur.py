@@ -53,8 +53,9 @@ class Player:
         data = {"id": self.id,
                 "last_name": self.last_name,
                 "first_name": self.first_name,
-                "birthdate": self.birthdate,
-                "club_id": self.club_id}
+                "birthdate": self.birthdate,  # TODO: validator
+                "club_id": self.club_id  # TODO: validator AB12345
+                }
         path = os.path.join(player_folder, str(self.id) + ".json")
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
