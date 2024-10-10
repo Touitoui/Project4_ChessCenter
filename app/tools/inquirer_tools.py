@@ -23,6 +23,7 @@ class InquirerTools:
 
     @classmethod
     def prompt_date(cls, question, format_type="date"):
+        validator = None
         match format_type:
             case "date":
                 validator = InquirerValidation.date_validation
@@ -30,8 +31,6 @@ class InquirerTools:
                 validator = InquirerValidation.datetime_validation
             case "time":
                 validator = InquirerValidation.time_validation
-            case _:
-                validator = InquirerValidation.datetime_validation
 
         answer = inquirer.text(
             message=question,
@@ -41,8 +40,7 @@ class InquirerTools:
         return answer
 
     @classmethod
-    # GESTION CHIFFRE InquirerPy à vérifier
-    def prompt_int(cls, question, default_number=None):  # TODO
+    def prompt_int(cls, question, default_number=None):
         answer = inquirer.number(
             message=question,
             min_allowed=1,

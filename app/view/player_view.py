@@ -11,12 +11,12 @@ class PlayerView:
         data = {
             "last_name": InquirerTools.prompt_text("Nom de famille:"),
             "first_name": InquirerTools.prompt_text("Prénom:"),
-            "birthdate": InquirerTools.prompt_date("Date de naissance (JJ-MM-AAAA):", "date"),
+            "birthdate": InquirerTools.prompt_date("Date de naissance (JJ/MM/AAAA):", "date"),
             "club_id": InquirerTools.prompt_club("Numéro de club (Ex: AB12345):"),
         }
         return data
 
-    @classmethod  # TODO : replace by show_player_list - don't do anything when selecting, show all info in list
+    @classmethod
     def select_player_for_info(cls, player_list, player_text, text=""):
         player_choice = []
         for i, player in enumerate(player_list):

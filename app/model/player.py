@@ -1,30 +1,23 @@
 import json
-import jsonpickle
 import os
 from os.path import isfile, join
+from datetime import date, datetime
+
 
 player_folder = 'data/players/'
-
-# from datetime import date
-#
-#
-# def calculate_age(born):
-#     today = date.today()
-#     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 
 class Player:
     players = {}
     next_id = 0
 
-    def __init__(self):  # , file_name):  # last_name, first_name, birthdate, club_id=0):
+    def __init__(self):
         self.id = 0
         self.last_name = None
         self.first_name = None
         self.birthdate = None
         self.club_id = None
         self.score = 0
-        # self._load_player(file_name)
 
     def new_player(self, data):
         self.id = self.next_id
@@ -53,8 +46,8 @@ class Player:
         data = {"id": self.id,
                 "last_name": self.last_name,
                 "first_name": self.first_name,
-                "birthdate": self.birthdate,  # TODO: validator
-                "club_id": self.club_id  # TODO: validator AB12345
+                "birthdate": self.birthdate,
+                "club_id": self.club_id
                 }
         path = os.path.join(player_folder, str(self.id) + ".json")
         with open(path, 'w', encoding='utf-8') as f:
@@ -63,17 +56,26 @@ class Player:
     def get_details(self):
         return [value for attr, value in vars(self).items() if not callable(value) and not attr.startswith("__")]
 
+    def get_age(self):
+        try:
+            birthday = datetime.strptime(self.birthdate, "%d/%m/%Y")
+            today = date.today()
+            age = today.year - birthday.year -((today.month, today.day) < (birthday.month, birthday.day))
+            age = str(age) + " ans"
+        except:
+            age = "Date incorrecte"
+        return age
+
     def get_full_name(self):
         return self.last_name + " " + self.first_name
 
     @classmethod
     def describe(cls, id_):
         player = cls.players[id_]
-        text = "ID: " + str(id_) + '\n'
-        text += "Nom: " + player.last_name + '\n'
-        text += "Prénom: " + player.first_name + '\n'
-        text += "Age: " + "" + " (" + player.birthdate + ")\n"  # TODO: Age
-        text += "ID Club: " + player.club_id + '\n'
+        text = player.last_name + ' '
+        text += player.first_name + ' - '
+        text += player.get_age() + " (" + player.birthdate + ") - "
+        text += "ID Club: " + player.club_id
         return text
 
     @classmethod
@@ -82,17 +84,15 @@ class Player:
 
     @classmethod
     def list_existing_players(cls):
-        # player_files = [f for f in os.listdir(player_folder) if isfile(join(player_folder, f))]
         player_id = list(cls.players.keys())
         player_text = []
         for id_ in player_id:
-            player_text.append(cls.players[id_].last_name + " " + cls.players[id_].first_name)
+            player_text.append(cls.describe(id_))
         return player_id, player_text
 
     @classmethod
     def load_all_players(cls):
         player_files = [f for f in os.listdir(player_folder) if isfile(join(player_folder, f))]
-        player_text = []
         for player in player_files:
             player_id = int(player.replace('.json', ''))
             if player_id >= cls.next_id:

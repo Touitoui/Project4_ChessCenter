@@ -21,8 +21,8 @@ class TournamentView:
             "name": InquirerTools.prompt_text("Nom du tournoi:"),
             "location": InquirerTools.prompt_text("Adresse:"),
 
-            "start": InquirerTools.prompt_date("Debut (HH:MM):", "time"),
-            "end": InquirerTools.prompt_date("Fin (HH:MM):", "time"),
+            "start": InquirerTools.prompt_date("Debut (HH:MM):", "datetime"),
+            "end": InquirerTools.prompt_date("Fin (HH:MM):", "datetime"),
             "description": InquirerTools.prompt_text("Description du tounoi:"),
             "current_turn": 1,
             "number_of_turns": InquirerTools.prompt_int("Nombre de tours (Défaut: 4):", 4)

@@ -1,12 +1,8 @@
-import os
-from os.path import isfile, join
 from app.view.menu_view import MenuView
 from app.view.tournament_view import TournamentView
 from app.view.match_view import MatchView
-
-from app.model.tournoi import Tournament
-from app.model.joueur import Player
-
+from app.tools.inquirer_tools import InquirerTools
+from app.model.tournament import Tournament
 from app.controller.player_controller import PlayerController
 
 tournament_folder = 'data/tournaments/'
@@ -14,7 +10,6 @@ tournament_folder = 'data/tournaments/'
 
 class TournamentController:
     def __init__(self):
-        # self.view = MenuView()
         self.tournament = Tournament()
 
     def main(self):
@@ -47,7 +42,7 @@ class TournamentController:
             case "create_player":
                 PlayerController.create_player()
             case False:
-                return self.view.tools.ask_confirmation("Do you want to exit?")
+                return InquirerTools.ask_confirmation("Do you want to exit?")
 
     def create_new_tournament(self):
         # TODO: RECUPERATION DES DONNEES A FAIRE DANS LA VUE / fix PlayerController

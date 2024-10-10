@@ -2,7 +2,7 @@ import random
 import json
 import jsonpickle
 import os
-from app.model.tour import Turn
+from app.model.turn import Turn
 import os
 from os.path import isfile, join
 import time

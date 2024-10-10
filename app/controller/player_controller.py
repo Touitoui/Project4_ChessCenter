@@ -1,4 +1,4 @@
-from app.model.joueur import Player
+from app.model.player import Player
 from app.view.player_view import PlayerView
 
 
@@ -15,12 +15,10 @@ class PlayerController:
     @classmethod
     def show_player_menu(cls):
         answer = True
-        player_files, player_text = Player.list_existing_players()  # TODO need NAME + AGE + CLUB ID
+        player_files, player_text = Player.list_existing_players()
         text = ""
         while answer:
             answer = PlayerView.select_player_for_info(player_files, player_text, text)
-            # if answer:
-            #     text = Player.describe(answer)
 
     @classmethod
     def create_player(cls):
