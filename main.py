@@ -12,8 +12,8 @@ folders = {
 
 
 def main():
-    for folder in folders:
-        create_folder(folder)
+    for x in folders:
+        create_folder(folders[x])
     # TODO: cleanup tool, reports
     # TODO: Support de presentation
     controller = TournamentController()
