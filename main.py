@@ -10,7 +10,6 @@ folders = {
     "tournaments": "data/tournaments/",
 }
 
-
 def main():
     for x in folders:
         create_folder(folders[x])

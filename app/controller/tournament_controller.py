@@ -58,10 +58,30 @@ class TournamentController:
         answer = TournamentView.reload_existing_tournament(list_file)
         self.tournament.load_tournament(answer)
 
-    def status_message(self):
+    def status_message(self):   # TODO : refacto matches
         text = self.tournament.turns[-1].name + '\n'
+        status = {}
+        for match in self.tournament.turns[-1].matches:
+            player_1 = match[0][0].id
+            score_1 = match[0][1]
+            player_2 = match[1][0].id
+            score_2 = match[1][1]
+            if score_1 == 0 and score_2 == 0:
+                status[player_1] = " (Match en cours)"
+                status[player_2] = " (Match en cours)"
+            elif score_1 == 1:
+                status[player_1] = " (Victoire)"
+                status[player_2] = " (Défaite)"
+            elif score_2 == 1:
+                status[player_1] = " (Défaite)"
+                status[player_2] = " (Victoire)"
+            else:
+                status[player_1] = " (Egalité)"
+                status[player_2] = " (Egalité)"
+
+
         for player in self.tournament.players:
-            text += player.last_name + " " + player.first_name + ": " + str(player.score) + '\n'
+            text += player.last_name + " " + player.first_name + ": " + str(player.score) + status[player.id] + '\n'
         text += "----------------\n"
         return text
 
