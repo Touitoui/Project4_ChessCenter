@@ -1,13 +1,11 @@
 from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
 from app.tools.inquirer_tools import InquirerTools
-from app.tools.inquirer_validation import InquirerValidation
 
 
 class PlayerView:
     @classmethod
     def create_player(cls):
-        # players = self.add_player(player_files, player_text)
         data = {
             "last_name": InquirerTools.prompt_text("Nom de famille:"),
             "first_name": InquirerTools.prompt_text("Prénom:"),
@@ -44,5 +42,3 @@ class PlayerView:
             invalid_message="Selectionnez au moins deux joueurs.",
         ).execute()
         return answer
-
-

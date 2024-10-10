@@ -1,5 +1,3 @@
-import random
-import json
 from app.controller.tournament_controller import TournamentController
 from app.tools.utils import create_folder
 
@@ -9,6 +7,7 @@ folders = {
     "players": "data/players/",
     "tournaments": "data/tournaments/",
 }
+
 
 def main():
     for x in folders:

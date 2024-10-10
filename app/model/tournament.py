@@ -1,13 +1,12 @@
 import random
 import json
 import jsonpickle
-import os
 from app.model.turn import Turn
 import os
 from os.path import isfile, join
-import time
 
 tournament_folder = 'data/tournaments/'
+
 
 class Tournament:
     def __init__(self):

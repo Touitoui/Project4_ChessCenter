@@ -52,9 +52,5 @@ class InquirerValidation:
             )
         return True
 
-
-
-
 # if __name__ == '__main__':
 #     InquirerTools.prompt_text("date:", InquirerValidation.timedate_validation)
-

@@ -60,9 +60,9 @@ class Player:
         try:
             birthday = datetime.strptime(self.birthdate, "%d/%m/%Y")
             today = date.today()
-            age = today.year - birthday.year -((today.month, today.day) < (birthday.month, birthday.day))
+            age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
             age = str(age) + " ans"
-        except:
+        except (ValueError, TypeError):
             age = "Date incorrecte"
         return age
 

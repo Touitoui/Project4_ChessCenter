@@ -25,4 +25,3 @@ class PlayerController:
         answer = PlayerView.create_player()
         player = Player()
         player.new_player(answer)
-

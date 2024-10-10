@@ -1,5 +1,4 @@
 from InquirerPy import inquirer
-from InquirerPy.separator import Separator
 from InquirerPy.base.control import Choice
 from app.tools.inquirer_tools import InquirerTools
 

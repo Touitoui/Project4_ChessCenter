@@ -1,7 +1,5 @@
 from InquirerPy import inquirer
 from InquirerPy.validator import EmptyInputValidator, NumberValidator
-from InquirerPy.separator import Separator
-from InquirerPy.base.control import Choice
 from app.tools.inquirer_validation import InquirerValidation
 
 

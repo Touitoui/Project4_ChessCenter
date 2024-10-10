@@ -79,10 +79,7 @@ class TournamentController:
                 status[player_1] = " (Egalité)"
                 status[player_2] = " (Egalité)"
 
-
         for player in self.tournament.players:
             text += player.last_name + " " + player.first_name + ": " + str(player.score) + status[player.id] + '\n'
         text += "----------------\n"
         return text
-
-
