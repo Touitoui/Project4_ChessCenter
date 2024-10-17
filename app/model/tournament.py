@@ -47,6 +47,7 @@ class Tournament:
             matches = self.next_turn(self.players)
             self.turns.append(Turn("Round " + str(self.current_turn), matches))
         else:
+            self.current_turn += 1
             self.in_progress = False
 
     def next_turn(self, players, random_order=False):
@@ -134,6 +135,23 @@ class Tournament:
 
     def get_details(self):
         return [value for attr, value in vars(self).items() if not callable(value) and not attr.startswith("__")]
+
+    def is_over(self):
+        if self.current_turn > self.number_of_turns:
+            return True
+        else:
+            return False
+
+    def describe(self):
+        text = ""
+        if self.name:
+            text = self.name + '\n'
+            if self.current_turn > self.number_of_turns:
+                text += "--Match terminé--" + '\n'
+            else:
+                text += "--Tour " + str(self.current_turn) + "/" + str(self.number_of_turns) + "--"
+
+        return text
 
     @classmethod
     def list_existing_tournaments(cls):

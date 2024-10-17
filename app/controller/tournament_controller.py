@@ -11,6 +11,7 @@ tournament_folder = 'data/tournaments/'
 class TournamentController:
     def __init__(self):
         self.tournament = Tournament()
+        self.text = ""
 
     def main(self):
         quit_ = False
@@ -19,7 +20,11 @@ class TournamentController:
                 self.tournament.save_tournament()
                 self.show_ongoing_matches()
             else:
-                quit_ = self.show_main_menu()
+                text = ""
+                if self.tournament.name:
+                    text = self.describe_ended_tournament()
+                    self.tournament.name = None
+                quit_ = self.show_main_menu(text)
 
         exit()
 
@@ -30,8 +35,8 @@ class TournamentController:
         elif turn == -1:
             self.tournament.new_turn()
 
-    def show_main_menu(self):
-        answer = MenuView.main_menu()
+    def show_main_menu(self, text=""):
+        answer = MenuView.main_menu(text)
         match answer:
             case "new":
                 self.create_new_tournament()
@@ -58,6 +63,12 @@ class TournamentController:
         answer = TournamentView.reload_existing_tournament(list_file)
         self.tournament.load_tournament(answer)
 
+    def describe_ended_tournament(self):
+        text = self.tournament.describe()
+        text += self.status_message()
+
+        return text
+
     def status_message(self):   # TODO : refacto matches
         text = self.tournament.turns[-1].name + '\n'
         status = {}
@@ -66,18 +77,22 @@ class TournamentController:
             score_1 = match[0][1]
             player_2 = match[1][0].id
             score_2 = match[1][1]
-            if score_1 == 0 and score_2 == 0:
-                status[player_1] = " (Match en cours)"
-                status[player_2] = " (Match en cours)"
-            elif score_1 == 1:
-                status[player_1] = " (Victoire)"
-                status[player_2] = " (Défaite)"
-            elif score_2 == 1:
-                status[player_1] = " (Défaite)"
-                status[player_2] = " (Victoire)"
+            if not self.tournament.is_over():
+                if score_1 == 0 and score_2 == 0:
+                    status[player_1] = " (Match en cours)"
+                    status[player_2] = " (Match en cours)"
+                elif score_1 == 1:
+                    status[player_1] = " (Victoire)"
+                    status[player_2] = " (Défaite)"
+                elif score_2 == 1:
+                    status[player_1] = " (Défaite)"
+                    status[player_2] = " (Victoire)"
+                else:
+                    status[player_1] = " (Egalité)"
+                    status[player_2] = " (Egalité)"
             else:
-                status[player_1] = " (Egalité)"
-                status[player_2] = " (Egalité)"
+                status[player_1] = ""
+                status[player_2] = ""
 
         for player in self.tournament.players:
             text += player.last_name + " " + player.first_name + ": " + str(player.score) + status[player.id] + '\n'

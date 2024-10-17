@@ -9,9 +9,9 @@ class MenuView:
         self.tournament = TournamentView
 
     @classmethod
-    def main_menu(cls):
+    def main_menu(cls, text=""):
         answer = inquirer.select(
-            message="Bienvenue:",
+            message=text + "Bienvenue:",
             choices=[
                 Choice("new", "Nouveau tournoi"),
                 Choice("load", "Charger tournoi"),

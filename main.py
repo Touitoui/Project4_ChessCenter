@@ -8,12 +8,16 @@ folders = {
     "tournaments": "data/tournaments/",
 }
 
+# TODO: Support de presentation
+# TODO: reports (save to file, tournament info)
+# TODO: match refacto
+# TODO: end match (+ show score when reload ended match)
+# TODO: README
+
 
 def main():
     for x in folders:
         create_folder(folders[x])
-    # TODO: cleanup tool, reports
-    # TODO: Support de presentation
     controller = TournamentController()
     controller.main()
 
