@@ -69,27 +69,27 @@ class TournamentController:
 
         return text
 
-    def status_message(self):   # TODO : refacto matches
+    def status_message(self):
         text = self.tournament.turns[-1].name + '\n'
         status = {}
         for match in self.tournament.turns[-1].matches:
-            player_1 = match[0][0].id
-            score_1 = match[0][1]
-            player_2 = match[1][0].id
-            score_2 = match[1][1]
+            player_1 = match.player_1.id
+            score_1 = match.score_1
+            player_2 = match.player_2.id
+            score_2 = match.score_2
             if not self.tournament.is_over():
                 if score_1 == 0 and score_2 == 0:
                     status[player_1] = " (Match en cours)"
                     status[player_2] = " (Match en cours)"
                 elif score_1 == 1:
-                    status[player_1] = " (Victoire)"
-                    status[player_2] = " (Défaite)"
+                    status[player_1] = " + 1 (Victoire)"
+                    status[player_2] = " + 0 (Défaite)"
                 elif score_2 == 1:
-                    status[player_1] = " (Défaite)"
-                    status[player_2] = " (Victoire)"
+                    status[player_1] = " + 0 (Défaite)"
+                    status[player_2] = " + 1 (Victoire)"
                 else:
-                    status[player_1] = " (Egalité)"
-                    status[player_2] = " (Egalité)"
+                    status[player_1] = " + 0.5 (Egalité)"
+                    status[player_2] = " + 0.5 (Egalité)"
             else:
                 status[player_1] = ""
                 status[player_2] = ""

@@ -2,6 +2,7 @@ import random
 import json
 import jsonpickle
 from app.model.turn import Turn
+from app.model.match import Match
 import os
 from os.path import isfile, join
 
@@ -56,9 +57,10 @@ class Tournament:
         if random_order:
             random.shuffle(players)
             for i in range(0, len(players), 2):
+                match = Match(players[i], players[i + 1])
                 new_pairs.append((players[i].id, players[i+1].id))
-                pair = ([players[i], 0], [players[i + 1], 0])
-                list_matches.append(pair)
+                # pair = ([players[i], 0], [players[i + 1], 0])
+                list_matches.append(match)
         else:
             players = sorted(players, key=lambda x: x.score, reverse=True)
             new_pairs = self.randomize_per_score(players)
@@ -68,8 +70,9 @@ class Tournament:
                         player_1 = p
                     if p.id == paired[1]:
                         player_2 = p
-                pair = ([player_1, 0], [player_2, 0])
-                list_matches.append(pair)
+                match = Match(player_1, player_2)
+                # pair = ([player_1, 0], [player_2, 0])
+                list_matches.append(match)
         self.all_matches.append(new_pairs)
         return list_matches
 

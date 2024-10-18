@@ -11,21 +11,22 @@ class Turn:
     def end_turn(self):
         self.end_time = datetime.today().strftime('%d-%m-%Y %H:%M:%S')
         for match in self.matches:
-            for player, score in match:
-                player.add_score(score)
+            match.apply_score()
+            # for player, score in match:
+            #     player.add_score(score)
 
     def end_of_match(self, match_number, result):
         match result:
             case "victory_1":
-                self.matches[match_number][0][1] = 1
+                self.matches[match_number].score_1 = 1
             case "victory_2":
-                self.matches[match_number][1][1] = 1
+                self.matches[match_number].score_2 = 1
             case _:
-                self.matches[match_number][0][1] = 0.5
-                self.matches[match_number][1][1] = 0.5
+                self.matches[match_number].score_1 = 0.5
+                self.matches[match_number].score_2 = 0.5
 
     def show_score(self, match_id):
         selected_match = self.matches[match_id]
-        return (selected_match[0][0].get_full_name() + ":" + str(selected_match[0][1])
-                + "\n" + selected_match[1][0].get_full_name() + ":" + str(selected_match[1][1]))
+        return (selected_match.player_1.get_full_name() + ":" + str(selected_match.score_1)
+                + "\n" + selected_match.player_2.get_full_name() + ":" + str(selected_match.score_2))
         # return self.matches[match_id].describe()
