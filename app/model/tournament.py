@@ -179,10 +179,9 @@ class Tournament:
     def describe_matches(self):
         text = ""
         for i, rounds in enumerate(self.previous_matches):
-            text += "--Round " + str(i) + "--\n"
+            text += "--Round " + str(i + 1) + "--\n"
             for match in rounds:
-                text += (match.player_1.get_full_name() + " (+" + str(match.score_1) + ") vs "
-                         + match.player_2.get_full_name() + " (+" + str(match.score_2) + ")\n")
+                text += match.describe()
         return text
 
     @classmethod
