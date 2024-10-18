@@ -46,6 +46,8 @@ class TournamentController:
                 PlayerController.show_player_menu()
             case "create_player":
                 PlayerController.create_player()
+            case "info_tournament":
+                self.tournaments_info()
             case False:
                 return InquirerTools.ask_confirmation("Do you want to exit?")
 
@@ -64,7 +66,7 @@ class TournamentController:
         self.tournament.load_tournament(answer)
 
     def describe_ended_tournament(self):
-        text = self.tournament.describe()
+        text = self.tournament.describe_status()
         text += self.status_message()
 
         return text
@@ -98,3 +100,27 @@ class TournamentController:
             text += player.last_name + " " + player.first_name + ": " + str(player.score) + status[player.id] + '\n'
         text += "----------------\n"
         return text
+
+    @classmethod
+    def tournaments_info(cls, tournaments_text=""):
+        stay_in_menu = True
+        tournaments_files = Tournament.list_existing_tournaments()
+        while stay_in_menu:
+            selected_tournament = TournamentView.select_tournament_for_info(tournaments_files, tournaments_text)
+            if selected_tournament:
+                tournament = Tournament()
+                tournament.load_tournament(selected_tournament)
+                # get Tournament with selected_tournament id
+                option = True
+                text = ""
+                while option:
+                    option = TournamentView.choose_option_info(text)
+                    match option:
+                        case "name_date":
+                            text = tournament.describe()
+                        case "list_players":
+                            text = tournament.describe_players()
+                        case "match_recap":
+                            text = tournament.describe_matches()
+                        case False:
+                            stay_in_menu = option

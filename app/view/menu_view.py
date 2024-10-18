@@ -15,6 +15,7 @@ class MenuView:
             choices=[
                 Choice("new", "Nouveau tournoi"),
                 Choice("load", "Charger tournoi"),
+                Choice("info_tournament", "Info tournoi"),
                 Separator(),
                 Choice("show_players", "Afficher les joueurs"),
                 Choice("create_player", "Créer joueur"),

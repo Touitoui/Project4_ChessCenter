@@ -3,6 +3,7 @@ import json
 import jsonpickle
 from app.model.turn import Turn
 from app.model.match import Match
+from app.model.player import Player
 import os
 from os.path import isfile, join
 
@@ -145,7 +146,7 @@ class Tournament:
         else:
             return False
 
-    def describe(self):
+    def describe_status(self):
         text = ""
         if self.name:
             text = self.name + '\n'
@@ -154,6 +155,28 @@ class Tournament:
             else:
                 text += "--Tour " + str(self.current_turn) + "/" + str(self.number_of_turns) + "--"
 
+        return text
+
+    def describe(self):
+        text = ""
+        text += "Nom: " + self.name + '\n'
+        text += "Lieu: " + self.location + '\n'
+        text += "Début-Fin: " + self.start + '-' + self.end + '\n'
+        text += "Description: " + self.description + '\n'
+        text += "Tour actuel: " + str(self.current_turn) + '/' + str(self.number_of_turns) + '\n'
+        return text
+
+
+    def describe_players(self):
+        text = ""
+        for player in self.players:
+            text += Player.describe(player.id) + '\n'
+        return text
+
+    def describe_matches(self):
+        text = ""
+        for match in self.all_matches:
+            text += str(match)
         return text
 
     @classmethod
