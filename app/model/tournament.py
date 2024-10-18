@@ -21,6 +21,7 @@ class Tournament:
         self.current_turn = None
         self.number_of_turns = None
         self.all_matches = []
+        self.previous_matches = []
         self.turns = None
         self.file = None
         self.in_progress = False
@@ -75,6 +76,7 @@ class Tournament:
                 # pair = ([player_1, 0], [player_2, 0])
                 list_matches.append(match)
         self.all_matches.append(new_pairs)
+        self.previous_matches.append(list_matches)
         return list_matches
 
     def randomize_per_score(self, players):
@@ -132,6 +134,7 @@ class Tournament:
             self.current_turn = thawed.current_turn
             self.number_of_turns = thawed.number_of_turns
             self.all_matches = thawed.all_matches
+            self.previous_matches = thawed.previous_matches
             self.turns = thawed.turns
             self.file = thawed.file
             self.in_progress = thawed.in_progress
@@ -175,8 +178,11 @@ class Tournament:
 
     def describe_matches(self):
         text = ""
-        for match in self.all_matches:
-            text += str(match)
+        for i, rounds in enumerate(self.previous_matches):
+            text += "--Round " + str(i) + "--\n"
+            for match in rounds:
+                text += (match.player_1.get_full_name() + " (+" + str(match.score_1) + ") vs "
+                         + match.player_2.get_full_name() + " (+" + str(match.score_2) + ")\n")
         return text
 
     @classmethod

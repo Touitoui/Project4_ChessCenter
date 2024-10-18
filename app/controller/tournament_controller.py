@@ -122,5 +122,5 @@ class TournamentController:
                             text = tournament.describe_players()
                         case "match_recap":
                             text = tournament.describe_matches()
-                        case False:
-                            stay_in_menu = option
+            else:
+                stay_in_menu = False
