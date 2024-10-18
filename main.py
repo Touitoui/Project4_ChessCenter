@@ -9,8 +9,6 @@ folders = {
 }
 
 # TODO: Support de presentation
-# TODO: reports (save to file, tournament info)
-# TODO: match refacto
 # TODO: end match (+ show score when reload ended match)
 # TODO: README
 

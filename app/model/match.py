@@ -1,8 +1,5 @@
-# TODO: refacto usage
 class Match:
     def __init__(self, player_1, player_2):
-        # self.pair = ([player_1, 0], [player_2, 0])
-        # self.id =
         self.player_1 = player_1
         self.player_2 = player_2
         self.id_1 = self.player_1.id

@@ -1,2 +1,3 @@
 inquirerpy
 jsonpickle
+prompt_toolkit
