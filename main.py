@@ -9,7 +9,6 @@ folders = {
 }
 
 # TODO: Support de presentation
-# TODO: end match (+ show score when reload ended match)
 # TODO: README
 
 

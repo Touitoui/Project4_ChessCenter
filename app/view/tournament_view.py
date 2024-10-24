@@ -28,6 +28,43 @@ class TournamentView:
         }
         return data
 
+    @classmethod
+    def show_tournament_results(cls, tournament):
+        # Print header
+        print("=" * 50)
+        print(f"RÉSULTATS DU TOURNOI: {tournament.name}")
+        print(f"Lieu: {tournament.location}")
+        print(f"Date: {tournament.start} - {tournament.end}")
+        print("=" * 50)
+        print()
+
+        # Print final standings
+        print("Score final:")
+        print("-" * 20)
+        sorted_players = sorted(tournament.players, key=lambda x: x.score, reverse=True)
+        for i, player in enumerate(sorted_players):
+            print(f"{i + 1}. {player.get_full_name()}: {player.score} points")
+        print()
+
+        # Print round summaries
+        print("Résumé des rounds:")
+        print("-" * 20)
+        for turn in tournament.turns:
+            print(f"\n{turn.name}")
+            for match in turn.matches:
+                if match.score_1 == 1:
+                    result = "a gagné contre"
+                elif match.score_2 == 1:
+                    result = "a perdu contre"
+                else:
+                    result = "égalité avec"
+                print(f"{match.player_1.get_full_name()} {result} {match.player_2.get_full_name()}")
+
+        print("\n" + "=" * 50)
+
+        # Wait for user input before continuing
+        input("\nPressez entrer pour revenir au menu...")
+
     # Reports
     @classmethod
     def select_tournament_for_info(cls, tournaments_files, text=""):

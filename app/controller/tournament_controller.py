@@ -20,11 +20,11 @@ class TournamentController:
                 self.tournament.save_tournament()
                 self.show_ongoing_matches()
             else:
-                text = ""
                 if self.tournament.name:
-                    text = self.describe_ended_tournament()
+                    if not self.tournament.in_progress:  # Tournament just ended
+                        TournamentView.show_tournament_results(self.tournament)
                     self.tournament.name = None
-                quit_ = self.show_main_menu(text)
+                quit_ = self.show_main_menu("")
 
         exit()
 
@@ -40,7 +40,7 @@ class TournamentController:
         match answer:
             case "new":
                 self.create_new_tournament()
-            case "load":  # TODO : show final score if ended
+            case "load":
                 self.load_tournament()
             case "show_players":
                 PlayerController.show_player_menu()
@@ -49,7 +49,7 @@ class TournamentController:
             case "info_tournament":
                 self.tournaments_info()
             case False:
-                return InquirerTools.ask_confirmation("Do you want to exit?")
+                return InquirerTools.ask_confirmation("Voulez-vous quitter?")
 
     def create_new_tournament(self):
         # TODO: RECUPERATION DES DONNEES A FAIRE DANS LA VUE / fix PlayerController
@@ -64,12 +64,6 @@ class TournamentController:
         list_file = Tournament.list_existing_tournaments()
         answer = TournamentView.reload_existing_tournament(list_file)
         self.tournament.load_tournament(answer)
-
-    def describe_ended_tournament(self):
-        text = self.tournament.describe_status()
-        text += self.status_message()
-
-        return text
 
     def status_message(self):
         text = self.tournament.turns[-1].name + '\n'
