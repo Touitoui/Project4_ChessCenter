@@ -69,6 +69,13 @@ class Player:
     def get_full_name(self):
         return self.last_name + " " + self.first_name
 
+    def describe_me(self):
+        text = self.last_name + ' '
+        text += self.first_name + ' - '
+        text += self.get_age() + " (" + self.birthdate + ") - "
+        text += "ID Club: " + self.club_id
+        return text
+
     @classmethod
     def describe(cls, id_):
         player = cls.players[id_]

@@ -8,8 +8,10 @@ class Match:
         self.score_2 = None
 
     def apply_score(self):
-        self.player_1.score += self.score_1
-        self.player_2.score += self.score_2
+        print(self.player_1.get_full_name() + str(self.score_1))
+        if self.score_1 and self.score_2:
+            self.player_1.score += self.score_1
+            self.player_2.score += self.score_2
 
     def describe(self):
         if not self.score_1:

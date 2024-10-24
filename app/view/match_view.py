@@ -8,7 +8,7 @@ class MatchView:
     def view_current_matches(cls, matches, status):
         matches_choices = []
         for i, match in enumerate(matches):
-            if match.score_1 == 0 and match.score_2 == 0:
+            if not match.score_1 and not match.score_2:
                 player_1 = match.player_1.get_full_name()
                 player_2 = match.player_2.get_full_name()
                 text = player_1 + " - " + player_2

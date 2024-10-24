@@ -80,7 +80,7 @@ class TournamentController:
             player_2 = match.player_2.id
             score_2 = match.score_2
             if not self.tournament.is_over():
-                if score_1 == 0 and score_2 == 0:
+                if not score_1 and not score_2:
                     status[player_1] = " (Match en cours)"
                     status[player_2] = " (Match en cours)"
                 elif score_1 == 1:
