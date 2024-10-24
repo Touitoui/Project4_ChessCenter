@@ -52,15 +52,15 @@ python main.py
    - **Créer joueur**: Ajoute un nouveau joueur à la base de donnée
    - **Quitter**: Quitte l'application
 
-3. Creating a Tournament:
-   - Enter tournament details (name, location, dates)
-   - Select participating players
-   - Specify number of rounds (default is 4)
-   - Enter match results as games are completed
+3. Créer un Tournoi:
+   - Entrer les informations du tournoi (Nom, Lieu, Date)
+   - Selectionner les participants
+   - Définir le nombre de rounds (4 par default)
+   - Entrer les résultat des matches au fur et à mesure
 
-4. Managing Players:
-   - Players are identified by their name and club ID
-   - Club IDs follow the format: AB12345 (2 letters + 5 numbers)
+4. Gestion des joueurs:
+   - Les joueurs sont identifié par leur nom/prénom et leur ID de Club
+   - Les IDs de Club sont au format : AB12345 (2 lettres + 5 chiffres)
    - Les informations de joueurs sont enregistré de façon persistante dans des fichiers json
 
 ## Stoquage des données
