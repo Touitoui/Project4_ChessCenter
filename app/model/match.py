@@ -8,10 +8,9 @@ class Match:
         self.score_2 = None
 
     def apply_score(self):
-        print(self.player_1.get_full_name() + str(self.score_1))
-        if self.score_1 and self.score_2:
-            self.player_1.score += self.score_1
-            self.player_2.score += self.score_2
+        if self.score_1 is not None and self.score_2 is not None:
+            self.player_1.score += float(self.score_1)  # Convert to float to handle 0.5 for draws
+            self.player_2.score += float(self.score_2)
 
     def describe(self):
         if not self.score_1:
