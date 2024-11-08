@@ -31,8 +31,6 @@ class Tournament:
         self.location = data["location"]
         self.start = data["start"]
         self.end = data["end"]
-        # for player in data["players"]:
-        #     self.players[player.id] = player
         self.players = data["players"]
         self.description = data["description"]
         self.current_turn = data["current_turn"]
@@ -67,13 +65,9 @@ class Tournament:
             players = sorted(players, key=lambda x: x.score, reverse=True)
             new_pairs = self.randomize_per_score(players)
             for paired in new_pairs:
-                for p in players:  # TODO: UGLY
-                    if p.id == paired[0]:
-                        player_1 = p
-                    if p.id == paired[1]:
-                        player_2 = p
+                player_1 = Player.get_loaded_players()[paired[0]]
+                player_2 = Player.get_loaded_players()[paired[1]]
                 match = Match(player_1, player_2)
-                # pair = ([player_1, 0], [player_2, 0])
                 list_matches.append(match)
         self.all_matches.append(new_pairs)
         self.previous_matches.append(list_matches)
@@ -138,7 +132,6 @@ class Tournament:
             self.turns = thawed.turns
             self.file = thawed.file
             self.in_progress = thawed.in_progress
-            # print(self.name)
 
     def get_details(self):
         return [value for attr, value in vars(self).items() if not callable(value) and not attr.startswith("__")]
@@ -169,7 +162,6 @@ class Tournament:
         text += "Tour actuel: " + str(self.current_turn) + '/' + str(self.number_of_turns) + '\n'
         return text
 
-
     def describe_players(self):
         text = ""
         for player in self.players:
@@ -187,4 +179,8 @@ class Tournament:
     @classmethod
     def list_existing_tournaments(cls):
         only_files = [f for f in os.listdir(tournament_folder) if isfile(join(tournament_folder, f))]
-        return only_files
+
+        names = []
+        for file in only_files:
+            names.append(file.split('_')[0])
+        return only_files, names
