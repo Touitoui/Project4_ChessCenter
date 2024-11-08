@@ -6,7 +6,7 @@ from app.tools.inquirer_tools import InquirerTools
 class TournamentView:
     @classmethod
     def reload_existing_tournament(cls, tournament_list):
-        tournament_list.append(Choice("return", "Retour"))
+        tournament_list.append(Choice(False, "Retour"))
         answer = inquirer.select(
             message="Quel tournoi charger?:",
             choices=tournament_list
@@ -71,9 +71,6 @@ class TournamentView:
         tournament_choice = []
         for file in tournaments_files:
             tournament_choice.append(Choice(file, file))
-        # tournament_choice = []
-        # for i, tournament in enumerate(tournaments_list):
-        #     tournament_choice.append(Choice(tournament, tournaments_text[i]))
         InquirerTools.sort_choices(tournament_choice)
         tournament_choice.append(Choice(False, "Retour"))
         answer = inquirer.select(

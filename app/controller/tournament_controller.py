@@ -63,7 +63,8 @@ class TournamentController:
     def load_tournament(self):
         list_file = Tournament.list_existing_tournaments()
         answer = TournamentView.reload_existing_tournament(list_file)
-        self.tournament.load_tournament(answer)
+        if answer:
+            self.tournament.load_tournament(answer)
 
     def status_message(self):
         text = self.tournament.turns[-1].name + '\n'
