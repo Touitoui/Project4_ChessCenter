@@ -119,7 +119,7 @@ chess-tournament-manager/
 
 ## Formatage des données
 Les données joueur étant sauvegardé dans des fichiers JSON simple, ceux-ci peuvent être exporté/importé, et modifié manuellement au besoin.
-
+Le fichier json est nommé après l'id du joueur.
 ### Player JSON Format:
 ```json
 {
