@@ -52,7 +52,6 @@ class TournamentController:
                 return InquirerTools.ask_confirmation("Voulez-vous quitter?")
 
     def create_new_tournament(self):
-        # TODO: RECUPERATION DES DONNEES A FAIRE DANS LA VUE / fix PlayerController
         players = PlayerController.add_players()
         for player in players:
             player.score = 0
@@ -101,7 +100,9 @@ class TournamentController:
         stay_in_menu = True
         tournaments_files, tournaments_names = Tournament.list_existing_tournaments()
         while stay_in_menu:
-            selected_tournament = TournamentView.select_tournament_for_info(tournaments_files, tournaments_names, tournaments_text)
+            selected_tournament = TournamentView.select_tournament_for_info(tournaments_files,
+                                                                            tournaments_names,
+                                                                            tournaments_text)
             if selected_tournament:
                 tournament = Tournament()
                 tournament.load_tournament(selected_tournament)

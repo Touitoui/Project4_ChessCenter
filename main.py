@@ -8,8 +8,7 @@ folders = {
     "tournaments": "data/tournaments/",
 }
 
-# TODO: Support de presentation
-# TODO: README
+# TODO: Error with special characters in json name
 
 
 def main():

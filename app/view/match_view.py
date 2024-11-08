@@ -21,10 +21,7 @@ class MatchView:
             selected_player_1 = matches[answer].player_1.get_full_name()
             selected_player_2 = matches[answer].player_2.get_full_name()
             answer_winner = cls.view_select_winner(selected_player_1, selected_player_2)
-            # if answer_winner:
             return answer, answer_winner
-            # else:
-            #     return False
         else:
             return -1, None
 
