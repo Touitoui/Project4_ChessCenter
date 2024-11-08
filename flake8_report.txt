@@ -1,0 +1,2 @@
+[1m.\app\view\tournament_view.py[m[36m:[m97[36m:[m1[36m:[m [1m[31mW391[m blank line at end of file
+1     W391 blank line at end of file
