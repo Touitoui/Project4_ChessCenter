@@ -61,8 +61,8 @@ class TournamentController:
         self.tournament.save_tournament()
 
     def load_tournament(self):
-        list_file = Tournament.list_existing_tournaments()
-        answer = TournamentView.reload_existing_tournament(list_file)
+        tournament_choice, tournaments_names = Tournament.list_existing_tournaments()
+        answer = TournamentView.reload_existing_tournament(tournament_choice, tournaments_names)
         if answer:
             self.tournament.load_tournament(answer)
 
@@ -99,9 +99,9 @@ class TournamentController:
     @classmethod
     def tournaments_info(cls, tournaments_text=""):
         stay_in_menu = True
-        tournaments_files = Tournament.list_existing_tournaments()
+        tournaments_files, tournaments_names = Tournament.list_existing_tournaments()
         while stay_in_menu:
-            selected_tournament = TournamentView.select_tournament_for_info(tournaments_files, tournaments_text)
+            selected_tournament = TournamentView.select_tournament_for_info(tournaments_files, tournaments_names, tournaments_text)
             if selected_tournament:
                 tournament = Tournament()
                 tournament.load_tournament(selected_tournament)

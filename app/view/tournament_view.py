@@ -5,11 +5,14 @@ from app.tools.inquirer_tools import InquirerTools
 
 class TournamentView:
     @classmethod
-    def reload_existing_tournament(cls, tournament_list):
-        tournament_list.append(Choice(False, "Retour"))
+    def reload_existing_tournament(cls, tournaments_files, tournaments_names):
+        tournament_choice = []
+        for i, file in enumerate(tournaments_files):
+            tournament_choice.append(Choice(file, tournaments_names[i]))
+        tournament_choice.append(Choice(False, "Retour"))
         answer = inquirer.select(
             message="Quel tournoi charger?:",
-            choices=tournament_list
+            choices=tournament_choice
         ).execute()
         return answer
 
@@ -67,10 +70,10 @@ class TournamentView:
 
     # Reports
     @classmethod
-    def select_tournament_for_info(cls, tournaments_files, text=""):
+    def select_tournament_for_info(cls, tournaments_files, tournaments_names, text=""):
         tournament_choice = []
-        for file in tournaments_files:
-            tournament_choice.append(Choice(file, file))
+        for i, file in enumerate(tournaments_files):
+            tournament_choice.append(Choice(file, tournaments_names[i]))
         InquirerTools.sort_choices(tournament_choice)
         tournament_choice.append(Choice(False, "Retour"))
         answer = inquirer.select(
