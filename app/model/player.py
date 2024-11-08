@@ -20,8 +20,7 @@ class Player:
         self.score = 0
 
     def new_player(self, data):
-        self.id = self.next_id
-        self.next_id += 1
+        self.id = self.use_next_id()
         self.last_name = data["last_name"]
         self.first_name = data["first_name"]
         self.birthdate = data["birthdate"]
