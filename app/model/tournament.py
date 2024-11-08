@@ -5,6 +5,7 @@ from app.model.turn import Turn
 from app.model.match import Match
 from app.model.player import Player
 import os
+from datetime import datetime
 from os.path import isfile, join
 
 tournament_folder = 'data/tournaments/'
@@ -38,7 +39,8 @@ class Tournament:
         self.all_matches = []
         matches = self.next_turn(self.players, random_order=True)
         self.turns = [Turn("Round 1", matches)]
-        self.file = os.path.join(tournament_folder, self.name + "_" + self.location + ".json")
+        self.file = os.path.join(tournament_folder, self.name + "_"
+                                 + datetime.today().strftime('%H-%M_%d-%m-%Y') + ".json")
         self.in_progress = True
 
     def new_turn(self):
@@ -59,7 +61,6 @@ class Tournament:
             for i in range(0, len(players), 2):
                 match = Match(players[i], players[i + 1])
                 new_pairs.append((players[i].id, players[i+1].id))
-                # pair = ([players[i], 0], [players[i + 1], 0])
                 list_matches.append(match)
         else:
             players = sorted(players, key=lambda x: x.score, reverse=True)
